@@ -1,9 +1,11 @@
 import { Table } from "antd";
+import { ColumnsType } from "antd/lib/table";
 import React, { ReactText } from "react";
-import { IUsersCollection } from "../models/user";
+import { IUserWithKey } from "../models/user";
 
 interface IComponentProps {
-  collection: IUsersCollection;
+  data: IUserWithKey[];
+  columns:ColumnsType<IUserWithKey>
 }
 
 interface IComponentState {
@@ -17,32 +19,19 @@ class UsersTable extends React.Component<IComponentProps, IComponentState> {
         this.state = { selectedRowKeys: [], selectedUsersNames: [] }
     }
   render() {
-    const { collection } = this.props;
+    const { data, columns } = this.props;
     const { selectedRowKeys, selectedUsersNames } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange
     };
-    const columns = [
-      {
-        title: "Имя",
-        dataIndex: "firstName"
-      },
-      {
-        title: "Фамилия",
-        dataIndex: "lastName"
-      },
-      {
-        title: "Возраст",
-        dataIndex: "age"
-      }
-    ];
+    
     return (
       <Table
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={collection.items}
-        footer={() => selectedUsersNames.length ? selectedUsersNames.reduce((acc, value) => `${acc}, ${value}` ): null}
+        dataSource={data}
+        footer={() => selectedUsersNames.length ? `Пользователи: ${selectedUsersNames.reduce((acc, value) => `${acc}, ${value}`)}`: 'Пользователи:'}
         pagination={false}
         size="small"
         bordered
@@ -51,9 +40,8 @@ class UsersTable extends React.Component<IComponentProps, IComponentState> {
   }
 
   onSelectChange = (selectedRowKeys: ReactText[]) => {
-    const { collection } = this.props;
-    const selectedUsersNames = selectedRowKeys.map(item => collection.items.find(user => user.id === item)?.firstName)
-    debugger;
+    const { data } = this.props;
+    const selectedUsersNames = selectedRowKeys.map(item => data.find(user => user.id === item)?.firstName)
     this.setState({ selectedRowKeys, selectedUsersNames });
   };
 }

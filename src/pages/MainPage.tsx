@@ -1,3 +1,4 @@
+import { Col, Row } from "antd";
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -22,8 +23,30 @@ class MainPage extends React.PureComponent<UsersProps> {
     if (!collection) {
       return null;
     }
+    const data = collection.items.map(item => ({ ...item, key: item.id }));
+    const columns = [
+      {
+        title: "Имя",
+        dataIndex: "firstName"
+      },
+      {
+        title: "Фамилия",
+        dataIndex: "lastName"
+      },
+      {
+        title: "Возраст",
+        dataIndex: "age"
+      }
+    ];
 
-    return <UsersTable collection={collection} />;
+    debugger;
+    return (
+      <Row justify="center">
+        <Col xs={24} sm={22}>
+          <UsersTable data={data} columns={columns} />
+        </Col>
+      </Row>
+    );
   }
 }
 const mapStateToProps = (state: IApplicationState) => ({

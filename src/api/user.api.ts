@@ -1,7 +1,9 @@
 import users from "../api/users";
 const getUsers = (): Promise<any> => {
   return new Promise((resolve, reject) => {
-    resolve(users);
+    setTimeout(function() {
+      resolve(users);
+    }, 2000);
   }).then(response => response);
 };
 const userApi = {
