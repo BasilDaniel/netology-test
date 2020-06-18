@@ -1,0 +1,27 @@
+.spiner {
+  &_center {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  &_top {
+    margin-top: 40px;
+    display: flex;
+    align-items: flex-start;
+  }
+  &_hover {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+  }
+  .ant-spin {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+  }
+}
