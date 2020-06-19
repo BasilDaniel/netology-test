@@ -13,7 +13,7 @@ interface IComponentState {
   selectedUsersNames: (string | undefined)[];
 }
 
-class UsersTable extends React.Component<IComponentProps, IComponentState> {
+class UsersTable extends React.PureComponent<IComponentProps, IComponentState> {
     constructor(props:IComponentProps){
         super(props)
         this.state = { selectedRowKeys: [], selectedUsersNames: [] }
