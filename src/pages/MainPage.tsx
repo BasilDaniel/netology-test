@@ -39,7 +39,6 @@ class MainPage extends React.PureComponent<UsersProps> {
       }
     ];
 
-    debugger;
     return (
       <Row justify="center">
         <Col xs={24} sm={22}>
